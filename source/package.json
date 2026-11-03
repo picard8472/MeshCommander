@@ -26,7 +26,7 @@
         "Commander",
         "MeshCommander"
     ],
-    "main": "commander.htm",
+    "main": "Commander.htm",
     "name": "meshcommander",
     "single-instance": false,
     "version": "0.9.5",

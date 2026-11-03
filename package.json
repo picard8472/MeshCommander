@@ -1,0 +1,12 @@
+{
+  "name": "meshcommander-macos",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dmg": "node build.mjs"
+  },
+  "devDependencies": {
+    "nw-builder": "^4.24.0"
+  }
+}

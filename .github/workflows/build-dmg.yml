@@ -1,0 +1,44 @@
+name: Build macOS DMG
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dmg:
+    name: macOS arm64 DMG
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install build dependencies
+        run: npm ci
+
+      - name: Build application and DMG
+        run: ./mkapp
+
+      - name: Verify the build is arm64 and the DMG is valid
+        run: |
+          lipo -archs build/app/MeshCommander.app/Contents/MacOS/MeshCommander | grep -qx arm64
+          hdiutil verify build/MeshCommander-arm64.dmg
+          mountpoint="$(mktemp -d)"
+          hdiutil attach -nobrowse -readonly -mountpoint "$mountpoint" build/MeshCommander-arm64.dmg
+          codesign --verify --deep --strict --verbose=2 "$mountpoint/MeshCommander.app"
+          test -L "$mountpoint/Applications"
+          hdiutil detach "$mountpoint"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MeshCommander-arm64-dmg
+          path: build/MeshCommander-arm64.dmg
+          if-no-files-found: error
