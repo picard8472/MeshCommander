@@ -12,6 +12,7 @@
         "jsdom": "^27.0.0"
     },
     "description": "Intel(R) Active Management Technology console tool",
+    "inject_js_start": "crypto-compat.js",
     "keywords": [
         "Intel",
         "Intel",
