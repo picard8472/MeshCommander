@@ -34,4 +34,4 @@ uploaded as a workflow artifact. See `.github/workflows/build-dmg.yml`.
 > signing is fine for local use, but distribution requires Developer ID signing
 > and notarization.
 
-[ [ Download ] ](https://github.com/gomesjj/MeshCommander/releases/latest)
+[ [ Download ] ](https://github.com/picard8472/MeshCommander/releases/latest)

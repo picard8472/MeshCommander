@@ -31,7 +31,7 @@
     "main": "Commander.htm",
     "name": "meshcommander",
     "single-instance": false,
-    "version": "0.9.5",
+    "version": "0.9.6",
     "webkit": {},
     "window": {
         "frame": true,

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   dmg:
@@ -61,3 +61,12 @@ jobs:
           name: MeshCommander-arm64-dmg
           path: build/MeshCommander-arm64.dmg
           if-no-files-found: error
+
+      - name: Create GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: MeshCommander ${{ github.ref_name }}
+          files: build/MeshCommander-arm64.dmg
+          generate_release_notes: true
+          fail_on_unmatched_files: true
